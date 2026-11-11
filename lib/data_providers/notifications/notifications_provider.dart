@@ -38,7 +38,7 @@ class NotificationsProvider {
             iOS: initializationSettingsDarwin,
             linux: initializationSettingsLinux,
             macOS: initializationSettingsDarwin);
-    await notif.initialize(initializationSettings);
+    await notif.initialize(settings: initializationSettings);
 
     return NotificationsProvider(notif);
   }
@@ -90,7 +90,8 @@ class NotificationsProvider {
     NotificationDetails details = const NotificationDetails(
         iOS: darwin, android: android, macOS: darwin, linux: linux);
 
-    await _notif.show(0, title, body, details);
+    await _notif.show(
+        id: 0, title: title, body: body, notificationDetails: details);
   }
   
   Future<void> displayNoRunningTimersNotification(
@@ -118,7 +119,8 @@ class NotificationsProvider {
     NotificationDetails details = const NotificationDetails(
         iOS: darwin, android: android, macOS: darwin, linux: linux);
 
-    await _notif.show(0, title, body, details);
+    await _notif.show(
+        id: 0, title: title, body: body, notificationDetails: details);
   }
 
   Future<void> removeAllNotifications() async {

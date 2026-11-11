@@ -15,7 +15,7 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter_app_badger/flutter_app_badger.dart';
+import 'package:app_badge_plus/app_badge_plus.dart';
 import 'package:timecop/blocs/projects/projects_event.dart';
 import 'package:timecop/blocs/timers/timers_event.dart';
 import 'package:timecop/data_providers/data/data_provider.dart';
@@ -157,7 +157,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         if (event.showBadgeCounts!) {
           // trigger a notification permission window
           if (Platform.isIOS || Platform.isAndroid) {
-            FlutterAppBadger.removeBadge();
+            AppBadgePlus.updateBadge(0);
           }
           await settings.setBool("hasAskedNotificationPermissions", true);
           hasAskedNotificationPermissions = true;
@@ -169,7 +169,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         if (event.showRunningTimersAsNotifications!) {
           // trigger a notification permission window
           if (Platform.isIOS || Platform.isAndroid) {
-            FlutterAppBadger.removeBadge();
+            AppBadgePlus.updateBadge(0);
           }
           await settings.setBool("hasAskedNotificationPermissions", true);
           hasAskedNotificationPermissions = true;

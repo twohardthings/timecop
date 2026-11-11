@@ -83,7 +83,7 @@ class _GroupedStoppedTimersRowNarrowSimpleState
                 SlidableAction(
                     backgroundColor: theme.colorScheme.primary,
                     foregroundColor: theme.colorScheme.onPrimary,
-                    icon: FontAwesomeIcons.play,
+                    icon: FontAwesomeIcons.play.data,
                     onPressed: (_) => widget.resumeTimer(context))
               ]),
           child: ExpansionTile(
@@ -124,7 +124,7 @@ class _GroupedStoppedTimersRowNarrowSimpleState
                 if (_isHovering && !_expanded) const SizedBox(width: 4),
                 if (_isHovering && !_expanded)
                   IconButton(
-                      icon: const Icon(FontAwesomeIcons.circlePlay),
+                      icon: const FaIcon(FontAwesomeIcons.circlePlay),
                       onPressed: () => widget.resumeTimer(context),
                       tooltip: L10N.of(context).tr.resumeTimer),
               ],

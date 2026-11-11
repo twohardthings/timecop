@@ -125,12 +125,12 @@ class StoppedTimerRowWide extends StatelessWidget {
             const RowSeparator(),
             const SizedBox(width: _spaceWidth),
             IconButton(
-                icon: const Icon(FontAwesomeIcons.trash),
+                icon: const FaIcon(FontAwesomeIcons.trash),
                 onPressed: () => deleteTimer(context),
                 tooltip: L10N.of(context).tr.delete),
             const SizedBox(width: _spaceWidth),
             IconButton(
-                icon: const Icon(FontAwesomeIcons.circlePlay),
+                icon: const FaIcon(FontAwesomeIcons.circlePlay),
                 onPressed: () => resumeTimer(context),
                 tooltip: L10N.of(context).tr.resumeTimer),
           ],

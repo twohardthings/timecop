@@ -71,7 +71,7 @@ class DateRangeTile extends StatelessWidget {
                         )))
                     .toList())),
         ListTile(
-          leading: const Icon(FontAwesomeIcons.calendar),
+          leading: const FaIcon(FontAwesomeIcons.calendar),
           title: Text(L10N.of(context).tr.from),
           trailing: Row(mainAxisSize: MainAxisSize.min, children: [
             startDate == null
@@ -83,7 +83,7 @@ class DateRangeTile extends StatelessWidget {
             if (startDate != null)
               IconButton(
                 tooltip: L10N.of(context).tr.remove,
-                icon: const Icon(FontAwesomeIcons.circleMinus),
+                icon: const FaIcon(FontAwesomeIcons.circleMinus),
                 onPressed: () => onStartChosen(null),
               )
           ]),
@@ -105,7 +105,7 @@ class DateRangeTile extends StatelessWidget {
           },
         ),
         ListTile(
-          leading: const Icon(FontAwesomeIcons.calendar),
+          leading: const FaIcon(FontAwesomeIcons.calendar),
           title: Text(L10N.of(context).tr.to),
           trailing: Row(mainAxisSize: MainAxisSize.min, children: [
             endDate == null
@@ -117,7 +117,7 @@ class DateRangeTile extends StatelessWidget {
             if (endDate != null)
               IconButton(
                 tooltip: L10N.of(context).tr.remove,
-                icon: const Icon(FontAwesomeIcons.circleMinus),
+                icon: const FaIcon(FontAwesomeIcons.circleMinus),
                 onPressed: () => onEndChosen(null),
               )
           ]),

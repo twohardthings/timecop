@@ -74,7 +74,7 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
                           Tooltip(
                               message: L10N.of(context).tr.projects,
                               child: InkWell(
-                                child: const Icon(
+                                child: const FaIcon(
                                   FontAwesomeIcons.penToSquare,
                                 ),
                                 onTap: () {

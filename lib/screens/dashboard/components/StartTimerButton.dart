@@ -57,7 +57,7 @@ class _StartTimerButtonState extends State<StartTimerButton> {
                 Positioned(
                   top: 15,
                   left: 18,
-                  child: Icon(FontAwesomeIcons.play),
+                  child: FaIcon(FontAwesomeIcons.play),
                 )
               ],
             ),
@@ -81,7 +81,7 @@ class _StartTimerButtonState extends State<StartTimerButton> {
                 Positioned(
                   top: 15,
                   left: 16,
-                  child: Icon(FontAwesomeIcons.stop),
+                  child: FaIcon(FontAwesomeIcons.stop),
                 )
               ],
             ),

@@ -57,7 +57,7 @@ class ProjectsScreen extends StatelessWidget {
                                           Theme.of(context).colorScheme.error,
                                       foregroundColor:
                                           Theme.of(context).colorScheme.onError,
-                                      icon: FontAwesomeIcons.trash,
+                                      icon: FontAwesomeIcons.trash.data,
                                       onPressed: (_) async {
                                         await _deleteProject(
                                             context, projectsBloc, project);
@@ -76,8 +76,8 @@ class ProjectsScreen extends StatelessWidget {
                                             .colorScheme
                                             .onPrimary,
                                         icon: project.archived
-                                            ? FontAwesomeIcons.boxOpen
-                                            : FontAwesomeIcons.boxArchive,
+                                            ? FontAwesomeIcons.boxOpen.data
+                                            : FontAwesomeIcons.boxArchive.data,
                                         onPressed: (_) {
                                           projectsBloc.add(EditProject(
                                               Project.clone(project,
@@ -90,7 +90,7 @@ class ProjectsScreen extends StatelessWidget {
                                 title: project.archived
                                     ? Row(
                                         children: [
-                                          Icon(
+                                          FaIcon(
                                             FontAwesomeIcons.boxArchive,
                                             color: Theme.of(context)
                                                 .colorScheme
@@ -153,7 +153,7 @@ class ProjectsScreen extends StatelessWidget {
             Positioned(
               top: 15,
               left: 16,
-              child: Icon(FontAwesomeIcons.plus),
+              child: FaIcon(FontAwesomeIcons.plus),
             )
           ],
         ),

@@ -43,7 +43,7 @@ class SettingsScreen extends StatelessWidget {
     bool? result = await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()!
-        .requestPermission();
+        .requestNotificationsPermission();
     if ((result != null && !result) && status.isDenied) {
       if (context.mounted) {
         dialogNotificationPermission(context);
@@ -163,7 +163,7 @@ class SettingsScreen extends StatelessWidget {
                       if (settings.defaultFilterDays != -1)
                         IconButton(
                           tooltip: L10N.of(context).tr.remove,
-                          icon: const Icon(FontAwesomeIcons.circleMinus),
+                          icon: const FaIcon(FontAwesomeIcons.circleMinus),
                           onPressed: () {
                             settingsBloc.add(const SetDefaultFilterDays(null));
                           },

@@ -66,7 +66,7 @@ class _TopBarState extends State<TopBar> {
     return AppBar(
         leading: _searching
             ? IconButton(
-                icon: const Icon(FontAwesomeIcons.chevronLeft),
+                icon: const FaIcon(FontAwesomeIcons.chevronLeft),
                 onPressed: cancelSearch,
                 tooltip: L10N.of(context).tr.cancel,
               )
@@ -95,7 +95,7 @@ class _TopBarState extends State<TopBar> {
             ? <Widget>[
                 IconButton(
                   tooltip: L10N.of(context).tr.search,
-                  icon: const Icon(FontAwesomeIcons.magnifyingGlass),
+                  icon: const FaIcon(FontAwesomeIcons.magnifyingGlass),
                   onPressed: () {
                     _searchController.text = "";
                     bloc.add(const SearchChangedEvent(""));
@@ -139,11 +139,11 @@ class _SearchBar extends StatelessWidget {
             bloc.add(SearchChangedEvent(search));
           },
           decoration: InputDecoration(
-              prefixIcon: Icon(FontAwesomeIcons.magnifyingGlass,
+              prefixIcon: FaIcon(FontAwesomeIcons.magnifyingGlass,
                   color: Theme.of(context).appBarTheme.foregroundColor),
               suffixIcon: IconButton(
                 color: Theme.of(context).appBarTheme.foregroundColor,
-                icon: const Icon(FontAwesomeIcons.circleXmark),
+                icon: const FaIcon(FontAwesomeIcons.circleXmark),
                 onPressed: cancelSearch,
                 tooltip: L10N.of(context).tr.cancel,
               )),

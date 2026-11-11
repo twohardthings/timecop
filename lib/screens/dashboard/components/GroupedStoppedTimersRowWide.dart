@@ -163,7 +163,7 @@ class _GroupedStoppedTimersRowWideState
           ),
           const SizedBox(width: _spaceWidth + 8),
           IconButton(
-            icon: const Icon(FontAwesomeIcons.circlePlay),
+            icon: const FaIcon(FontAwesomeIcons.circlePlay),
             onPressed: () => widget.resumeTimer(context),
             tooltip: L10N.of(context).tr.resumeTimer,
           ),
