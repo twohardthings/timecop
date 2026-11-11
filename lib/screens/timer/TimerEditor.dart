@@ -15,7 +15,7 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
     as dt;
@@ -207,21 +207,29 @@ class _TimerEditorState extends State<TimerEditor> {
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
               child: settingsBloc.state.autocompleteDescription
                   ? TypeAheadField<String?>(
-                      direction: AxisDirection.down,
-                      textFieldConfiguration: TextFieldConfiguration(
-                        controller: _descriptionController,
+                      direction: VerticalDirection.down,
+                      controller: _descriptionController,
+                      builder: (context, controller, focusNode) => TextField(
+                        controller: controller,
+                        focusNode: focusNode,
                         autocorrect: true,
                         decoration: InputDecoration(
                           labelText: L10N.of(context).tr.description,
                           hintText: L10N.of(context).tr.whatWereYouDoing,
                         ),
                       ),
-                      noItemsFoundBuilder: (context) => ListTile(
+                      decorationBuilder: (context, child) => Material(
+                        type: MaterialType.card,
+                        elevation: 4,
+                        borderRadius: BorderRadius.circular(8),
+                        child: child,
+                      ),
+                      emptyBuilder: (context) => ListTile(
                           title: Text(L10N.of(context).tr.noItemsFound),
                           enabled: false),
                       itemBuilder: (BuildContext context, String? desc) =>
                           ListTile(title: Text(desc!)),
-                      onSuggestionSelected: (String? description) =>
+                      onSelected: (String? description) =>
                           _descriptionController!.text = description!,
                       suggestionsCallback: (pattern) async {
                         if (pattern.length < 2) return [];

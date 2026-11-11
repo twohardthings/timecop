@@ -206,8 +206,8 @@ class FlatpakMeta {
       required this.lowercaseAppName,
       required this.githubReleaseOrganization,
       required this.githubReleaseProject,
-      required List<Release>? localReleases,
-      required List<ReleaseAsset>? localReleaseAssets,
+      required this._localReleases,
+      required this._localReleaseAssets,
       required this.localLinuxBuildDir,
       required this.appStreamPath,
       required this.desktopPath,
@@ -215,9 +215,7 @@ class FlatpakMeta {
       required this.freedesktopRuntime,
       required this.buildCommandsAfterUnpack,
       required this.extraModules,
-      required this.finishArgs})
-      : _localReleases = localReleases,
-        _localReleaseAssets = localReleaseAssets {
+      required this.finishArgs}) {
     if (githubReleaseOrganization != null && githubReleaseProject != null) {
       _githubReleases =
           GithubReleases(githubReleaseOrganization!, githubReleaseProject!);
@@ -238,7 +236,7 @@ class FlatpakMeta {
             'Metadata must include Github repository info if fetching releases from Github.');
       }
       releases.addAll(
-          await _githubReleases!.getReleases(addedTodaysVersion != null));
+          await _githubReleases.getReleases(addedTodaysVersion != null));
     } else {
       if (_localReleases == null && addedTodaysVersion == null) {
         throw Exception(
@@ -258,7 +256,7 @@ class FlatpakMeta {
         throw Exception(
             'Metadata must include Github repository info if fetching releases from Github.');
       }
-      return await _githubReleases!.getLatestReleaseAssets();
+      return await _githubReleases.getLatestReleaseAssets();
     } else {
       if (_localReleases == null) {
         throw Exception(

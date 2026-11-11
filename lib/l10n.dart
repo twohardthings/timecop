@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:intl/intl.dart';
 import 'package:timecop/data_providers/l10n/fluent_l10n_provider.dart';
 import 'package:timecop/data_providers/l10n/l10n_provider.dart';

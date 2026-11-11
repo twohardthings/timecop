@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:timecop/l10n.dart';
 
 enum ThemeType {
@@ -59,8 +59,6 @@ enum ThemeType {
         return L10N.of(context).tr.lightMaterialYou;
       case ThemeType.darkMaterialYou:
         return L10N.of(context).tr.darkMaterialYou;
-      default:
-        return null;
     }
   }
 
