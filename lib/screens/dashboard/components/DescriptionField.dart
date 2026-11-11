@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
@@ -63,10 +63,12 @@ class _DescriptionFieldState extends State<DescriptionField> {
 
       if (settings.state.autocompleteDescription) {
         return TypeAheadField<String?>(
-          direction: AxisDirection.up,
-          textFieldConfiguration: TextFieldConfiguration(
-              focusNode: _focus,
-              controller: _controller,
+          direction: VerticalDirection.up,
+          focusNode: _focus,
+          controller: _controller,
+          builder: (context, controller, focusNode) => TextField(
+              focusNode: focusNode,
+              controller: controller,
               autocorrect: true,
               decoration: InputDecoration(
                   hintText: L10N.of(context).tr.whatAreYouDoing),
@@ -84,11 +86,17 @@ class _DescriptionFieldState extends State<DescriptionField> {
                     project: bloc.state.newProject));
                 bloc.add(const TimerWasStartedEvent());
               }),
+          decorationBuilder: (context, child) => Material(
+            type: MaterialType.card,
+            elevation: 4,
+            borderRadius: BorderRadius.circular(8),
+            child: child,
+          ),
           itemBuilder: (BuildContext context, String? desc) =>
               ListTile(title: Text(desc!)),
-          noItemsFoundBuilder: (context) => ListTile(
+          emptyBuilder: (context) => ListTile(
               title: Text(L10N.of(context).tr.noItemsFound), enabled: false),
-          onSuggestionSelected: (String? description) {
+          onSelected: (String? description) {
             _controller!.text = description!;
             bloc.add(DescriptionChangedEvent(description));
           },

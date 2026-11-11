@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/blocs/locale/locale_bloc.dart';
@@ -37,17 +37,18 @@ class LocaleOptions extends StatelessWidget {
             onTap: () async {
               Locale? newLocale = await showModalBottomSheet<Locale>(
                   context: context,
-                  builder: (context) => ListView(
+                  builder: (context) => RadioGroup<Locale?>(
+                      groupValue: state.locale,
+                      onChanged: (Locale? type) {
+                        bloc.add(ChangeLocaleEvent(type));
+                        Navigator.pop(context, type);
+                      },
+                      child: ListView(
                         shrinkWrap: true,
                         children: <Widget>[
                           RadioListTile<Locale?>(
                             title: Text(L10N.of(context).tr.automaticLanguage),
                             value: null,
-                            groupValue: state.locale,
-                            onChanged: (Locale? type) {
-                              bloc.add(ChangeLocaleEvent(type));
-                              Navigator.pop(context, type);
-                            },
                           ),
                         ]
                             .followedBy([
@@ -70,18 +71,13 @@ class LocaleOptions extends StatelessWidget {
                               const Locale('zh', 'CN'),
                               const Locale('zh', 'TW'),
                             ].map(
-                              (l) => RadioListTile<Locale>(
+                              (l) => RadioListTile<Locale?>(
                                 title: Text(L10N.of(context).tr.langName(l)),
                                 value: l,
-                                groupValue: state.locale,
-                                onChanged: (Locale? type) {
-                                  bloc.add(ChangeLocaleEvent(type));
-                                  Navigator.pop(context, type);
-                                },
                               ),
                             ))
                             .toList(),
-                      ));
+                      )));
 
               bloc.add(ChangeLocaleEvent(newLocale));
             },

@@ -15,7 +15,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -102,21 +102,21 @@ class _ExportScreenState extends State<ExportScreen> {
                     value: settingsState.exportIncludeDate,
                     onChanged: (bool value) => settingsBloc
                         .add(SetBoolValueEvent(exportIncludeDate: value)),
-                    activeColor: Theme.of(context).colorScheme.primary,
+                    activeThumbColor: Theme.of(context).colorScheme.primary,
                   ),
                   SwitchListTile.adaptive(
                     title: Text(L10N.of(context).tr.project),
                     value: settingsState.exportIncludeProject,
                     onChanged: (bool value) => settingsBloc
                         .add(SetBoolValueEvent(exportIncludeProject: value)),
-                    activeColor: Theme.of(context).colorScheme.primary,
+                    activeThumbColor: Theme.of(context).colorScheme.primary,
                   ),
                   SwitchListTile.adaptive(
                     title: Text(L10N.of(context).tr.description),
                     value: settingsState.exportIncludeDescription,
                     onChanged: (bool value) => settingsBloc.add(
                         SetBoolValueEvent(exportIncludeDescription: value)),
-                    activeColor: Theme.of(context).colorScheme.primary,
+                    activeThumbColor: Theme.of(context).colorScheme.primary,
                   ),
                   SwitchListTile.adaptive(
                     title: Text(L10N.of(context).tr.combinedProjectDescription),
@@ -124,35 +124,35 @@ class _ExportScreenState extends State<ExportScreen> {
                     onChanged: (bool value) => settingsBloc.add(
                         SetBoolValueEvent(
                             exportIncludeProjectDescription: value)),
-                    activeColor: Theme.of(context).colorScheme.primary,
+                    activeThumbColor: Theme.of(context).colorScheme.primary,
                   ),
                   SwitchListTile.adaptive(
                     title: Text(L10N.of(context).tr.startTime),
                     value: settingsState.exportIncludeStartTime,
                     onChanged: (bool value) => settingsBloc
                         .add(SetBoolValueEvent(exportIncludeStartTime: value)),
-                    activeColor: Theme.of(context).colorScheme.primary,
+                    activeThumbColor: Theme.of(context).colorScheme.primary,
                   ),
                   SwitchListTile.adaptive(
                     title: Text(L10N.of(context).tr.endTime),
                     value: settingsState.exportIncludeEndTime,
                     onChanged: (bool value) => settingsBloc
                         .add(SetBoolValueEvent(exportIncludeEndTime: value)),
-                    activeColor: Theme.of(context).colorScheme.primary,
+                    activeThumbColor: Theme.of(context).colorScheme.primary,
                   ),
                   SwitchListTile.adaptive(
                     title: Text(L10N.of(context).tr.timeH),
                     value: settingsState.exportIncludeDurationHours,
                     onChanged: (bool value) => settingsBloc.add(
                         SetBoolValueEvent(exportIncludeDurationHours: value)),
-                    activeColor: Theme.of(context).colorScheme.primary,
+                    activeThumbColor: Theme.of(context).colorScheme.primary,
                   ),
                   SwitchListTile.adaptive(
                     title: Text(L10N.of(context).tr.notes),
                     value: settingsState.exportIncludeNotes,
                     onChanged: (bool value) => settingsBloc
                         .add(SetBoolValueEvent(exportIncludeNotes: value)),
-                    activeColor: Theme.of(context).colorScheme.primary,
+                    activeThumbColor: Theme.of(context).colorScheme.primary,
                   ),
                 ],
               ),
@@ -192,7 +192,7 @@ class _ExportScreenState extends State<ExportScreen> {
                     value: settingsState.exportGroupTimers,
                     onChanged: (bool value) => settingsBloc
                         .add(SetBoolValueEvent(exportGroupTimers: value)),
-                    activeColor: Theme.of(context).colorScheme.primary,
+                    activeThumbColor: Theme.of(context).colorScheme.primary,
                   ),
                 )
               ],

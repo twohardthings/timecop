@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -58,7 +58,7 @@ void main() {
           create: (_) => SettingsBloc(settings, data),
         ),
         BlocProvider<TimersBloc>(
-          create: (_) => TimersBloc(data, settings),
+          create: (_) => TimersBloc(data, settings, notificationsProvider),
         ),
         BlocProvider<ProjectsBloc>(
           create: (_) => ProjectsBloc(data),

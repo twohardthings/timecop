@@ -14,7 +14,7 @@
 
 import 'dart:io';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -102,7 +102,7 @@ class SettingsScreen extends StatelessWidget {
                 value: settings.groupTimers,
                 onChanged: (bool value) =>
                     settingsBloc.add(SetBoolValueEvent(groupTimers: value)),
-                activeColor: Theme.of(context).colorScheme.primary,
+                activeThumbColor: Theme.of(context).colorScheme.primary,
               ),
             ),
             BlocBuilder<SettingsBloc, SettingsState>(
@@ -113,7 +113,7 @@ class SettingsScreen extends StatelessWidget {
                 value: settings.showProjectNames,
                 onChanged: (bool value) => settingsBloc
                     .add(SetBoolValueEvent(showProjectNames: value)),
-                activeColor: Theme.of(context).colorScheme.primary,
+                activeThumbColor: Theme.of(context).colorScheme.primary,
               ),
             ),
             BlocBuilder<SettingsBloc, SettingsState>(
@@ -124,7 +124,7 @@ class SettingsScreen extends StatelessWidget {
                 value: settings.collapseDays,
                 onChanged: (bool value) =>
                     settingsBloc.add(SetBoolValueEvent(collapseDays: value)),
-                activeColor: Theme.of(context).colorScheme.primary,
+                activeThumbColor: Theme.of(context).colorScheme.primary,
               ),
             ),
             BlocBuilder<SettingsBloc, SettingsState>(
@@ -135,7 +135,7 @@ class SettingsScreen extends StatelessWidget {
                 value: settings.autocompleteDescription,
                 onChanged: (bool value) => settingsBloc
                     .add(SetBoolValueEvent(autocompleteDescription: value)),
-                activeColor: Theme.of(context).colorScheme.primary,
+                activeThumbColor: Theme.of(context).colorScheme.primary,
               ),
             ),
             BlocBuilder<SettingsBloc, SettingsState>(
@@ -146,7 +146,7 @@ class SettingsScreen extends StatelessWidget {
                 value: settings.defaultFilterStartDateToMonday,
                 onChanged: (bool value) => settingsBloc.add(
                     SetBoolValueEvent(defaultFilterStartDateToMonday: value)),
-                activeColor: Theme.of(context).colorScheme.primary,
+                activeThumbColor: Theme.of(context).colorScheme.primary,
               ),
             ),
             BlocBuilder<SettingsBloc, SettingsState>(
@@ -220,7 +220,7 @@ class SettingsScreen extends StatelessWidget {
                 value: settings.oneTimerAtATime,
                 onChanged: (bool value) =>
                     settingsBloc.add(SetBoolValueEvent(oneTimerAtATime: value)),
-                activeColor: Theme.of(context).colorScheme.primary,
+                activeThumbColor: Theme.of(context).colorScheme.primary,
               ),
             ),
             if (Platform.isIOS || Platform.isAndroid)
@@ -232,7 +232,7 @@ class SettingsScreen extends StatelessWidget {
                   value: settings.showBadgeCounts,
                   onChanged: (bool value) => settingsBloc
                       .add(SetBoolValueEvent(showBadgeCounts: value)),
-                  activeColor: Theme.of(context).colorScheme.primary,
+                  activeThumbColor: Theme.of(context).colorScheme.primary,
                 ),
               ),
             BlocBuilder<SettingsBloc, SettingsState>(
@@ -255,7 +255,7 @@ class SettingsScreen extends StatelessWidget {
                   settingsBloc.add(SetBoolValueEvent(
                       showRunningTimersAsNotifications: value));
                 },
-                activeColor: Theme.of(context).colorScheme.primary,
+                activeThumbColor: Theme.of(context).colorScheme.primary,
               ),
             ),
             BlocBuilder<SettingsBloc, SettingsState>(
@@ -278,7 +278,7 @@ class SettingsScreen extends StatelessWidget {
                   settingsBloc.add(SetBoolValueEvent(
                       nagAboutMissingTimer: value));
                 },
-                activeColor: Theme.of(context).colorScheme.primary,
+                activeThumbColor: Theme.of(context).colorScheme.primary,
               ),
             ),
           ],

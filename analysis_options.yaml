@@ -1,7 +1,12 @@
 include: package:flutter_lints/flutter.yaml
 
 analyzer:
-  exclude: [build/**]
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - macos/**
+    - linux/**
   errors:
     file_names: ignore
 

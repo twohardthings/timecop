@@ -14,7 +14,8 @@
 
 import 'dart:io';
 
-import 'package:flutter/material.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ThemeUtil {
   static const _pageTransitionsTheme =
@@ -82,7 +83,7 @@ class ThemeUtil {
       appBarScrolledUnderElevation: 4);
 
   static Color getOnBackgroundLighter(BuildContext context) =>
-      Theme.of(context).colorScheme.onSurface.withOpacity(0.62);
+      Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.62);
 
   static ThemeData getThemeFromColors(
           {required Brightness brightness,

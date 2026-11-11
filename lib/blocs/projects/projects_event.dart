@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:timecop/models/project.dart';
 
 abstract class ProjectsEvent extends Equatable {
