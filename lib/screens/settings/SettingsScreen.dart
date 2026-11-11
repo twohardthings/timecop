@@ -230,8 +230,17 @@ class SettingsScreen extends StatelessWidget {
                     SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.showBadgeCounts),
                   value: settings.showBadgeCounts,
-                  onChanged: (bool value) => settingsBloc
-                      .add(SetBoolValueEvent(showBadgeCounts: value)),
+                  onChanged: (bool value) {
+                    if (value) {
+                      // app_badge_plus does not request authorization itself
+                      BlocProvider.of<NotificationsBloc>(context)
+                          .add(const RequestNotificationPermissions());
+                      if (Platform.isAndroid) {
+                        requestAndroidNotificationPermission(context);
+                      }
+                    }
+                    settingsBloc.add(SetBoolValueEvent(showBadgeCounts: value));
+                  },
                   activeThumbColor: Theme.of(context).colorScheme.primary,
                 ),
               ),
