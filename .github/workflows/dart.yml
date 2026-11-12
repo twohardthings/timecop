@@ -77,12 +77,38 @@ jobs:
             exit 0
           fi
           echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/release.jks"
-          {
-            echo "storeFile=$RUNNER_TEMP/release.jks"
-            echo "storePassword=$ANDROID_KEYSTORE_PASSWORD"
-            echo "keyAlias=$ANDROID_KEY_ALIAS"
-            echo "keyPassword=$ANDROID_KEY_PASSWORD"
-          } > android/key.properties
+          # Write the values with Java-properties escaping (backslashes, leading
+          # whitespace, non-ASCII), since build.gradle reads them via Properties.load.
+          python3 - <<'PY'
+          import os
+
+          def escape(value):
+              out = []
+              for i, ch in enumerate(value):
+                  if ch == "\\":
+                      out.append("\\\\")
+                  elif ch == " " and i == 0:
+                      out.append("\\ ")
+                  elif ch in "\t\n\r\f":
+                      out.append({"\t": "\\t", "\n": "\\n", "\r": "\\r", "\f": "\\f"}[ch])
+                  elif ord(ch) < 0x20 or ord(ch) > 0x7E:
+                      data = ch.encode("utf-16-be")
+                      for j in range(0, len(data), 2):
+                          out.append("\\u%04x" % int.from_bytes(data[j:j + 2], "big"))
+                  else:
+                      out.append(ch)
+              return "".join(out)
+
+          values = {
+              "storeFile": os.path.join(os.environ["RUNNER_TEMP"], "release.jks"),
+              "storePassword": os.environ["ANDROID_KEYSTORE_PASSWORD"],
+              "keyAlias": os.environ["ANDROID_KEY_ALIAS"],
+              "keyPassword": os.environ["ANDROID_KEY_PASSWORD"],
+          }
+          with open("android/key.properties", "w", encoding="ascii") as f:
+              for key, value in values.items():
+                  f.write(f"{key}={escape(value)}\n")
+          PY
 
       - name: Build release APK
         run: flutter build apk --release
