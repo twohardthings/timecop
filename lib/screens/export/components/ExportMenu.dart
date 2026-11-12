@@ -41,7 +41,7 @@ class ExportMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopupMenuButton<ExportMenuItem>(
       key: const Key("exportMenuButton"),
-      icon: const Icon(FontAwesomeIcons.database),
+      icon: const FaIcon(FontAwesomeIcons.database),
       onSelected: (ExportMenuItem item) async {
         final scaffoldMessenger = ScaffoldMessenger.of(context);
         final theme = Theme.of(context);
@@ -53,17 +53,17 @@ class ExportMenu extends StatelessWidget {
         switch (item) {
           case ExportMenuItem.import:
             try {
-              final result = await FilePicker.platform.pickFiles(
-                  type: FileType.any,
-                  allowMultiple: false,
-                  withData: Platform.isLinux);
+              final result = await FilePicker.pickFile(type: FileType.any);
               if (result == null) {
                 return;
               }
 
-              final resultPath = Platform.isLinux
-                  ? await _duplicateToTempDir(result.files.first.bytes!)
-                  : result.files.first.path!;
+              // Files without a local path (e.g. Android content URIs) and
+              // all files on Linux are copied to a temporary location first.
+              final localPath = result.path;
+              final resultPath = Platform.isLinux || localPath == null
+                  ? await _duplicateToTempDir(await result.readAsBytes())
+                  : localPath;
 
               if (!await DatabaseProvider.isValidDatabaseFile(resultPath)) {
                 scaffoldMessenger.showSnackBar(SnackBar(
@@ -107,14 +107,12 @@ class ExportMenu extends StatelessWidget {
 
             try {
               if (Platform.isMacOS || Platform.isLinux) {
-                String? outputFile = await FilePicker.platform.saveFile(
+                await FilePicker.saveFile(
                   dialogTitle: "",
                   fileName: "timecop.db",
+                  bytes: await dbFile.readAsBytes(),
+                  mimeType: "application/vnd.sqlite3",
                 );
-
-                if (outputFile != null) {
-                  await dbFile.copy(outputFile);
-                }
               } else {
                 String dbPath = dbFile.path;
                 if (Platform.isAndroid) {
@@ -126,10 +124,10 @@ class ExportMenu extends StatelessWidget {
                     dbPath = copiedDB.path;
                   }
                 }
-                await Share.shareXFiles(
-                    [XFile(dbPath, mimeType: "application/vnd.sqlite3")],
+                await SharePlus.instance.share(ShareParams(
+                    files: [XFile(dbPath, mimeType: "application/vnd.sqlite3")],
                     subject: localization.tr
-                        .timeCopDatabase(dateFormat!.format(DateTime.now())));
+                        .timeCopDatabase(dateFormat!.format(DateTime.now()))));
               }
             } on Exception catch (e) {
               scaffoldMessenger.showSnackBar(SnackBar(
@@ -150,7 +148,7 @@ class ExportMenu extends StatelessWidget {
             key: const Key("exportMenuImport"),
             value: ExportMenuItem.import,
             child: ListTile(
-              leading: const Icon(FontAwesomeIcons.fileImport),
+              leading: const FaIcon(FontAwesomeIcons.fileImport),
               title: Text(L10N.of(context).tr.importDatabase),
             ),
           ),
@@ -158,7 +156,7 @@ class ExportMenu extends StatelessWidget {
             key: const Key("exportMenuExport"),
             value: ExportMenuItem.export,
             child: ListTile(
-              leading: const Icon(FontAwesomeIcons.fileExport),
+              leading: const FaIcon(FontAwesomeIcons.fileExport),
               title: Text(L10N.of(context).tr.exportDatabase),
             ),
           ),

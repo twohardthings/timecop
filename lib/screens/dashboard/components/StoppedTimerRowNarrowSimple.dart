@@ -66,7 +66,7 @@ class _StoppedTimerRowNarrowSimpleState
               SlidableAction(
                   backgroundColor: theme.colorScheme.error,
                   foregroundColor: theme.colorScheme.onError,
-                  icon: FontAwesomeIcons.trash,
+                  icon: FontAwesomeIcons.trash.data,
                   onPressed: widget.deleteTimer)
             ],
           ),
@@ -77,7 +77,7 @@ class _StoppedTimerRowNarrowSimpleState
                 SlidableAction(
                     backgroundColor: theme.colorScheme.primary,
                     foregroundColor: theme.colorScheme.onPrimary,
-                    icon: FontAwesomeIcons.play,
+                    icon: FontAwesomeIcons.play.data,
                     onPressed: (_) => widget.resumeTimer(context))
               ]),
           child: ListTile(
@@ -100,7 +100,7 @@ class _StoppedTimerRowNarrowSimpleState
                 if (_hovering) const SizedBox(width: 4),
                 if (_hovering)
                   IconButton(
-                      icon: const Icon(FontAwesomeIcons.circlePlay),
+                      icon: const FaIcon(FontAwesomeIcons.circlePlay),
                       onPressed: () => widget.resumeTimer(context),
                       tooltip: L10N.of(context).tr.resumeTimer),
               ]),

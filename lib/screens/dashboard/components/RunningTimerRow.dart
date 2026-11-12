@@ -42,7 +42,7 @@ class RunningTimerRow extends StatelessWidget {
             SlidableAction(
               backgroundColor: theme.colorScheme.error,
               foregroundColor: theme.colorScheme.onError,
-              icon: FontAwesomeIcons.trash,
+              icon: FontAwesomeIcons.trash.data,
               onPressed: (_) async {
                 final timersBloc = BlocProvider.of<TimersBloc>(context);
                 final bool delete = await showDialog<bool>(
@@ -85,7 +85,7 @@ class RunningTimerRow extends StatelessWidget {
             const SizedBox(width: 4),
             IconButton(
               tooltip: L10N.of(context).tr.stopTimer,
-              icon: const Icon(FontAwesomeIcons.solidCircleStop),
+              icon: const FaIcon(FontAwesomeIcons.solidCircleStop),
               onPressed: () {
                 final timers = BlocProvider.of<TimersBloc>(context);
                 timers.add(StopTimer(timer));

@@ -32,10 +32,10 @@ class ThemeOptions extends StatelessWidget {
             key: const Key("themeOption"),
             title: Text(L10N.of(context).tr.theme),
             subtitle: Text(state.theme?.display(context) ?? ""),
-            trailing: Icon(L10N.of(context).rtl
+            trailing: FaIcon(L10N.of(context).rtl
                 ? FontAwesomeIcons.chevronLeft
                 : FontAwesomeIcons.chevronRight),
-            leading: const Icon(FontAwesomeIcons.palette),
+            leading: const FaIcon(FontAwesomeIcons.palette),
             onTap: () async {
               ThemeType? oldTheme = state.theme;
               ThemeType? newTheme = await showModalBottomSheet<ThemeType>(

@@ -36,7 +36,7 @@ class PopupMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopupMenuButton<MenuItem>(
       key: const Key("menuButton"),
-      icon: const Icon(FontAwesomeIcons.bars),
+      icon: const FaIcon(FontAwesomeIcons.bars),
       onSelected: (MenuItem item) {
         switch (item) {
           case MenuItem.projects:
@@ -72,7 +72,7 @@ class PopupMenu extends StatelessWidget {
             key: const Key("menuProjects"),
             value: MenuItem.projects,
             child: ListTile(
-              leading: const Icon(FontAwesomeIcons.layerGroup),
+              leading: const FaIcon(FontAwesomeIcons.layerGroup),
               title: Text(L10N.of(context).tr.projects),
             ),
           ),
@@ -80,7 +80,7 @@ class PopupMenu extends StatelessWidget {
             key: const Key("menuReports"),
             value: MenuItem.reports,
             child: ListTile(
-              leading: const Icon(FontAwesomeIcons.chartPie),
+              leading: const FaIcon(FontAwesomeIcons.chartPie),
               title: Text(L10N.of(context).tr.reports),
             ),
           ),
@@ -88,7 +88,7 @@ class PopupMenu extends StatelessWidget {
             key: const Key("menuExport"),
             value: MenuItem.export,
             child: ListTile(
-              leading: const Icon(FontAwesomeIcons.fileExport),
+              leading: const FaIcon(FontAwesomeIcons.fileExport),
               title: Text(L10N.of(context).tr.exportImport),
             ),
           ),
@@ -96,7 +96,7 @@ class PopupMenu extends StatelessWidget {
             key: const Key("menuSettings"),
             value: MenuItem.settings,
             child: ListTile(
-              leading: const Icon(FontAwesomeIcons.gear),
+              leading: const FaIcon(FontAwesomeIcons.gear),
               title: Text(L10N.of(context).tr.settings),
             ),
           ),
@@ -104,7 +104,7 @@ class PopupMenu extends StatelessWidget {
             key: const Key("menuAbout"),
             value: MenuItem.about,
             child: ListTile(
-              leading: const Icon(FontAwesomeIcons.dna),
+              leading: const FaIcon(FontAwesomeIcons.dna),
               title: Text(L10N.of(context).tr.about),
             ),
           ),

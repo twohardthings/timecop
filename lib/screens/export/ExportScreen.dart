@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'dart:io';
+import 'dart:convert';
 import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:material_ui/material_ui.dart';
@@ -213,7 +214,7 @@ class _ExportScreenState extends State<ExportScreen> {
                 FloatingActionButton.extended(
                     heroTag: "csv",
                     label: Text(L10N.of(context).tr.exportCSV),
-                    icon: const Icon(FontAwesomeIcons.fileCsv),
+                    icon: const FaIcon(FontAwesomeIcons.fileCsv),
                     onPressed: () async {
                       final localizations = L10N.of(context);
                       await _export(
@@ -228,7 +229,7 @@ class _ExportScreenState extends State<ExportScreen> {
                 FloatingActionButton.extended(
                     heroTag: "pdf",
                     label: Text(L10N.of(context).tr.exportPDF),
-                    icon: const Icon(FontAwesomeIcons.solidFilePdf),
+                    icon: const FaIcon(FontAwesomeIcons.solidFilePdf),
                     onPressed: () async {
                       final localizations = L10N.of(context);
                       final pdf = await ExportUtils.toPDF(context, _startDate,
@@ -261,18 +262,14 @@ class _ExportScreenState extends State<ExportScreen> {
         (byteContent ==
             null)); //Either stringContent or byteContent is provided, not both
     if (Platform.isMacOS || Platform.isLinux) {
-      final outputFile = await FilePicker.platform.saveFile(
+      await FilePicker.saveFile(
         dialogTitle: "",
         fileName: fileName,
+        bytes: stringContent != null
+            ? Uint8List.fromList(utf8.encode(stringContent))
+            : byteContent!,
+        mimeType: mimetype,
       );
-
-      if (outputFile != null) {
-        if (stringContent != null) {
-          await File(outputFile).writeAsString(stringContent, flush: true);
-        } else {
-          await File(outputFile).writeAsBytes(byteContent!);
-        }
-      }
     } else {
       final directory = (Platform.isAndroid)
           ? await getExternalStorageDirectory()
@@ -284,9 +281,10 @@ class _ExportScreenState extends State<ExportScreen> {
       } else {
         await File(localPath).writeAsBytes(byteContent!);
       }
-      await Share.shareXFiles([XFile(localPath, mimeType: mimetype)],
+      await SharePlus.instance.share(ShareParams(
+          files: [XFile(localPath, mimeType: mimetype)],
           subject: localizations.tr
-              .timeCopEntries(dateFormat.format(DateTime.now())));
+              .timeCopEntries(dateFormat.format(DateTime.now()))));
     }
   }
 }

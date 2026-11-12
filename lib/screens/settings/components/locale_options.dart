@@ -30,10 +30,10 @@ class LocaleOptions extends StatelessWidget {
           return ListTile(
             title: Text(L10N.of(context).tr.language),
             subtitle: Text(L10N.of(context).tr.automaticLanguage),
-            trailing: Icon(L10N.of(context).rtl
+            trailing: FaIcon(L10N.of(context).rtl
                 ? FontAwesomeIcons.chevronLeft
                 : FontAwesomeIcons.chevronRight),
-            leading: const Icon(FontAwesomeIcons.language),
+            leading: const FaIcon(FontAwesomeIcons.language),
             onTap: () async {
               Locale? newLocale = await showModalBottomSheet<Locale>(
                   context: context,

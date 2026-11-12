@@ -39,7 +39,7 @@ import 'package:timecop/l10n.dart';
 import 'package:timecop/models/theme_type.dart';
 import 'package:timecop/screens/dashboard/DashboardScreen.dart';
 import 'package:timecop/themes.dart';
-import 'package:flutter_app_badger/flutter_app_badger.dart';
+import 'package:app_badge_plus/app_badge_plus.dart';
 
 import 'package:timecop/data_providers/data/database_provider.dart';
 import 'package:timecop/data_providers/settings/shared_prefs_settings_provider.dart';
@@ -145,13 +145,13 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
       } else if (settingsState.showBadgeCounts) {
         // need to ask permission
         if (count > 0) {
-          FlutterAppBadger.updateBadgeCount(count);
+          AppBadgePlus.updateBadge(count);
         } else {
-          FlutterAppBadger.removeBadge();
+          AppBadgePlus.updateBadge(0);
         }
       } else {
         // remove any and all badges if we disable the option
-        FlutterAppBadger.removeBadge();
+        AppBadgePlus.updateBadge(0);
       }
     }
   }

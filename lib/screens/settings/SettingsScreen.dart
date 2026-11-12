@@ -43,7 +43,7 @@ class SettingsScreen extends StatelessWidget {
     bool? result = await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()!
-        .requestPermission();
+        .requestNotificationsPermission();
     if ((result != null && !result) && status.isDenied) {
       if (context.mounted) {
         dialogNotificationPermission(context);
@@ -163,7 +163,7 @@ class SettingsScreen extends StatelessWidget {
                       if (settings.defaultFilterDays != -1)
                         IconButton(
                           tooltip: L10N.of(context).tr.remove,
-                          icon: const Icon(FontAwesomeIcons.circleMinus),
+                          icon: const FaIcon(FontAwesomeIcons.circleMinus),
                           onPressed: () {
                             settingsBloc.add(const SetDefaultFilterDays(null));
                           },
@@ -230,8 +230,17 @@ class SettingsScreen extends StatelessWidget {
                     SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.showBadgeCounts),
                   value: settings.showBadgeCounts,
-                  onChanged: (bool value) => settingsBloc
-                      .add(SetBoolValueEvent(showBadgeCounts: value)),
+                  onChanged: (bool value) {
+                    if (value) {
+                      // app_badge_plus does not request authorization itself
+                      BlocProvider.of<NotificationsBloc>(context)
+                          .add(const RequestNotificationPermissions());
+                      if (Platform.isAndroid) {
+                        requestAndroidNotificationPermission(context);
+                      }
+                    }
+                    settingsBloc.add(SetBoolValueEvent(showBadgeCounts: value));
+                  },
                   activeThumbColor: Theme.of(context).colorScheme.primary,
                 ),
               ),

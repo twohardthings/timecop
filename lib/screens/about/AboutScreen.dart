@@ -50,32 +50,32 @@ class AboutScreen extends StatelessWidget {
               MarkdownPageListTile(
                 filename: 'README.md',
                 title: Text(L10N.of(context).tr.readme),
-                icon: const Icon(FontAwesomeIcons.readme),
+                icon: const FaIcon(FontAwesomeIcons.readme),
               ),
               MarkdownPageListTile(
                 filename: 'CHANGELOG.md',
                 title: Text(L10N.of(context).tr.changeLog),
-                icon: const Icon(FontAwesomeIcons.boxesStacked),
+                icon: const FaIcon(FontAwesomeIcons.boxesStacked),
               ),
               MarkdownPageListTile(
                 filename: 'CONTRIBUTORS.md',
                 title: Text(L10N.of(context).tr.contributors),
-                icon: const Icon(FontAwesomeIcons.userAstronaut),
+                icon: const FaIcon(FontAwesomeIcons.userAstronaut),
               ),
               ListTile(
-                leading: const Icon(FontAwesomeIcons.globe),
+                leading: const FaIcon(FontAwesomeIcons.globe),
                 title: Text(L10N.of(context).tr.translate),
                 onTap: () => launchUrl(
                     Uri.parse("https://hosted.weblate.org/projects/timecop/")),
               ),
               ListTile(
-                leading: const Icon(FontAwesomeIcons.code),
+                leading: const FaIcon(FontAwesomeIcons.code),
                 title: Text(L10N.of(context).tr.sourceCode),
                 onTap: () =>
                     launchUrl(Uri.parse("https://github.com/hamaluik/timecop")),
               ),
               const LicensesPageListTile(
-                icon: Icon(FontAwesomeIcons.scroll),
+                icon: FaIcon(FontAwesomeIcons.scroll),
               ),
             ],
           );

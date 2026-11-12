@@ -219,7 +219,7 @@ class ExportUtils {
     final boldFont =
         Font.ttf(await rootBundle.load('fonts/PublicSans-Bold.ttf'));
 
-    final textStyleBody =
+    const textStyleBody =
         TextStyle(fontWeight: FontWeight.normal, fontSize: 11); //12
     final textStyleBodyBold =
         textStyleBody.copyWith(fontWeight: FontWeight.bold);

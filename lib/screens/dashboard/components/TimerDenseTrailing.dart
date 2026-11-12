@@ -61,7 +61,7 @@ class TimerDenseTrailing extends StatelessWidget {
                                 ],
                               )),
                           const SizedBox(height: 8),
-                          const Icon(FontAwesomeIcons.play, size: 16)
+                          const FaIcon(FontAwesomeIcons.play, size: 16)
                         ],
                       ))
                 ])));

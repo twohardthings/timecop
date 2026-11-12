@@ -62,7 +62,7 @@ class StoppedTimerRowNarrowDense extends StatelessWidget {
           SlidableAction(
               backgroundColor: Theme.of(context).colorScheme.error,
               foregroundColor: Theme.of(context).colorScheme.onError,
-              icon: FontAwesomeIcons.trash,
+              icon: FontAwesomeIcons.trash.data,
               onPressed: deleteTimer)
         ],
       ),

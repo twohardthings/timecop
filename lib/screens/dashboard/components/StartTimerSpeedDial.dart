@@ -80,7 +80,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
                 Positioned(
                   top: 7.5,
                   left: 8,
-                  child: Icon(FontAwesomeIcons.plus),
+                  child: FaIcon(FontAwesomeIcons.plus),
                 )
               ],
             ),
@@ -115,7 +115,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
                 Positioned(
                   top: 7,
                   left: 7.5,
-                  child: Icon(FontAwesomeIcons.stop),
+                  child: FaIcon(FontAwesomeIcons.stop),
                 )
               ],
             ),
@@ -145,7 +145,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
                       Positioned(
                         top: 15,
                         left: 16,
-                        child: Icon(
+                        child: FaIcon(
                           FontAwesomeIcons.stopwatch,
                         ),
                       )
@@ -159,7 +159,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
                       Positioned(
                         top: 15,
                         left: 16,
-                        child: Icon(FontAwesomeIcons.xmark),
+                        child: FaIcon(FontAwesomeIcons.xmark),
                       )
                     ],
                   ),
