@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Release builds shrink unused resources. The notification icon is only
+  referenced by name from Dart (AndroidInitializationSettings in
+  lib/data_providers/notifications/notifications_provider.dart), so the
+  shrinker cannot see that it is used and would remove it.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@drawable/ic_notification_icon" />
