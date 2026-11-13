@@ -252,7 +252,7 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
                           builder: (ColorScheme? lightDynamic,
                                   ColorScheme? darkDynamic) =>
                               MaterialApp(
-                            title: 'Time Cop',
+                            title: 'Time Cop Fork',
                             home: const DashboardScreen(),
                             theme: getTheme(
                                 themeState.theme, lightDynamic, darkDynamic),

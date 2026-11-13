@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <application
         android:name="${applicationName}"
-        android:label="Time Cop"
+        android:label="Time Cop Fork"
         android:localeConfig="@xml/locale_config"
         android:icon="@mipmap/launcher_icon">
         <activity
