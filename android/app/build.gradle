@@ -26,7 +26,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "ca.hamaluik.timecop"
+        applicationId = "io.github.twohardthings.timecop"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
