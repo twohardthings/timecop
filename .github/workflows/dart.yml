@@ -10,6 +10,7 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -39,3 +40,82 @@ jobs:
       - name: Run tests
         if: hashFiles('test/**') != ''
         run: flutter test
+
+  # Builds a release APK for every push to master (or a manual run) and
+  # attaches it to the workflow run as a downloadable artifact.
+  apk:
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Optional: sign with the release key when these repository secrets are
+      # set. Without them the APK is signed with the debug key.
+      - name: Configure release signing
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          if [ -z "$ANDROID_KEYSTORE_BASE64" ]; then
+            echo "::warning::Signing secrets not set; the APK will be signed with the debug key."
+            exit 0
+          fi
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/release.jks"
+          # Write the values with Java-properties escaping (backslashes, leading
+          # whitespace, non-ASCII), since build.gradle reads them via Properties.load.
+          python3 - <<'PY'
+          import os
+
+          def escape(value):
+              out = []
+              for i, ch in enumerate(value):
+                  if ch == "\\":
+                      out.append("\\\\")
+                  elif ch == " " and i == 0:
+                      out.append("\\ ")
+                  elif ch in "\t\n\r\f":
+                      out.append({"\t": "\\t", "\n": "\\n", "\r": "\\r", "\f": "\\f"}[ch])
+                  elif ord(ch) < 0x20 or ord(ch) > 0x7E:
+                      data = ch.encode("utf-16-be")
+                      for j in range(0, len(data), 2):
+                          out.append("\\u%04x" % int.from_bytes(data[j:j + 2], "big"))
+                  else:
+                      out.append(ch)
+              return "".join(out)
+
+          values = {
+              "storeFile": os.path.join(os.environ["RUNNER_TEMP"], "release.jks"),
+              "storePassword": os.environ["ANDROID_KEYSTORE_PASSWORD"],
+              "keyAlias": os.environ["ANDROID_KEY_ALIAS"],
+              "keyPassword": os.environ["ANDROID_KEY_PASSWORD"],
+          }
+          with open("android/key.properties", "w", encoding="ascii") as f:
+              for key, value in values.items():
+                  f.write(f"{key}={escape(value)}\n")
+          PY
+
+      - name: Build release APK
+        run: flutter build apk --release
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: timecop-${{ github.sha }}
+          path: build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
