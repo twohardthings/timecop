@@ -1,5 +1,5 @@
 <h1 align="center">
-  Time Cop
+  Time Cop Fork
   <br>
   <a href="https://timecop.apps.hamaluik.ca/"><img alt="icon" width="128" height="128" src="icon.no-bg.cyan.svg"></a>
 </h1>
